@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">E-Learning</string>
+
+    <string name="role">Role</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+
+    <string name="role_admin">Admin</string>
+    <string name="role_lecturer">Lecturer</string>
+    <string name="role_student">Student</string>
+
+    <string name="welcome_student">Student Dashboard</string>
+    <string name="welcome_lecturer">Lecturer Dashboard</string>
+    <string name="welcome_admin">Admin Dashboard</string>
+
+    <string name="invalid_credentials">Invalid credentials. Please try again.</string>
+</resources>

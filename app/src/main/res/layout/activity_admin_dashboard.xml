@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_admin"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnUserManagement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User Management"
+            android:layout_marginTop="16dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnContentManagement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Content Management"
+            android:layout_marginTop="12dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSystemSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="System Settings"
+            android:layout_marginTop="12dp"/>
+
+        <TextView
+            android:id="@+id/tvSystemStatsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="System Statistics"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"/>
+
+        <TextView
+            android:id="@+id/tvSystemStats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Users: 0\nActive Students: 0\nActive Lecturers: 0\nMaterials: 0"/>
+
+    </LinearLayout>
+</ScrollView>
