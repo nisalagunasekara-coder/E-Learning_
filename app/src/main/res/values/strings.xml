@@ -16,4 +16,11 @@
     <string name="welcome_admin">Admin Dashboard</string>
 
     <string name="invalid_credentials">Invalid credentials. Please try again.</string>
+
+    <!-- Lecturer dashboard strings -->
+    <string name="learning_materials_videos">Learning Materials (Videos)</string>
+    <string name="create_assign_quizzes">Create/Assign Quizzes</string>
+    <string name="student_progress">Student Progress</string>
+    <string name="recent_updates">Recent Updates</string>
+    <string name="no_updates_yet">No updates yet.</string>
 </resources>

@@ -10,6 +10,7 @@ import com.example.elearning.databinding.ActivityQuizBinding
 import com.example.elearning.ui.common.setupBackToolbar
 import com.example.elearning.ui.common.setupStudentBottomNav
 import com.example.elearning.R
+import com.example.elearning.data.db.DatabaseProvider
 
 class QuizActivity : AppCompatActivity() {
     private lateinit var binding: ActivityQuizBinding
@@ -21,6 +22,9 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Ensure DB is initialized
+        DatabaseProvider.init(applicationContext)
 
         // Back button on toolbar
         setupBackToolbar(binding.toolbar, title = "Quiz")

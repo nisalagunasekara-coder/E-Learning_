@@ -26,7 +26,7 @@ class VideoMaterialsActivity : AppCompatActivity() {
     private val pickVideo = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
         uri?.let {
             contentResolver.takePersistableUriPermission(it, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            VideoRepository.add(this, it)
+            VideoRepository.add(it)
             refresh()
         }
     }

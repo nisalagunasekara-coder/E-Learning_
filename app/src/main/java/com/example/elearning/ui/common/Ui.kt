@@ -9,6 +9,8 @@ import com.example.elearning.ui.student.StudentDashboardActivity
 import com.example.elearning.ui.student.PdfMaterialsActivity
 import com.example.elearning.ui.student.QuizHubActivity
 import com.example.elearning.ui.student.GamesHubActivity
+import android.util.Log
+import android.widget.Toast
 
 /**
  * Call from an Activity after setContentView, passing your toolbar from ViewBinding.
@@ -32,19 +34,51 @@ fun AppCompatActivity.setupStudentBottomNav(bottomNav: BottomNavigationView, sel
     bottomNav.setOnItemSelectedListener { item ->
         when (item.itemId) {
             R.id.nav_home -> {
-                if (this !is StudentDashboardActivity) startActivity(Intent(this, StudentDashboardActivity::class.java))
+                if (this !is StudentDashboardActivity) {
+                    try {
+                        Toast.makeText(this, "Opening Home...", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, StudentDashboardActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT))
+                    } catch (e: Exception) {
+                        Log.e("BottomNav", "Failed to open StudentDashboardActivity", e)
+                        Toast.makeText(this, "Failed to open Home: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+                }
                 true
             }
             R.id.nav_pdfs -> {
-                if (this !is PdfMaterialsActivity) startActivity(Intent(this, PdfMaterialsActivity::class.java))
+                if (this !is PdfMaterialsActivity) {
+                    try {
+                        Toast.makeText(this, "Opening PDFs...", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, PdfMaterialsActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT))
+                    } catch (e: Exception) {
+                        Log.e("BottomNav", "Failed to open PdfMaterialsActivity", e)
+                        Toast.makeText(this, "Failed to open PDFs: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+                }
                 true
             }
             R.id.nav_quizzes -> {
-                if (this !is QuizHubActivity) startActivity(Intent(this, QuizHubActivity::class.java))
+                if (this !is QuizHubActivity) {
+                    try {
+                        Toast.makeText(this, "Opening Quizzes...", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, QuizHubActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT))
+                    } catch (e: Exception) {
+                        Log.e("BottomNav", "Failed to open QuizHubActivity", e)
+                        Toast.makeText(this, "Failed to open Quizzes: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+                }
                 true
             }
             R.id.nav_games -> {
-                if (this !is GamesHubActivity) startActivity(Intent(this, GamesHubActivity::class.java))
+                if (this !is GamesHubActivity) {
+                    try {
+                        Toast.makeText(this, "Opening Games...", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, GamesHubActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT))
+                    } catch (e: Exception) {
+                        Log.e("BottomNav", "Failed to open GamesHubActivity", e)
+                        Toast.makeText(this, "Failed to open Games: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+                }
                 true
             }
             else -> false

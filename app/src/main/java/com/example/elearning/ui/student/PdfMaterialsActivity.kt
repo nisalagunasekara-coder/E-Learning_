@@ -27,6 +27,18 @@ class PdfMaterialsActivity : AppCompatActivity() {
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             }
             startActivity(Intent.createChooser(intent, "Open PDF"))
+        },
+        onDelete = { uriString ->
+            androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Delete PDF")
+                .setMessage("Are you sure you want to delete this PDF?")
+                .setPositiveButton("Delete") { _, _ ->
+                    if (PdfRepository.remove(uriString)) {
+                        refresh()
+                    }
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
         }
     )
 
@@ -65,7 +77,8 @@ class PdfMaterialsActivity : AppCompatActivity() {
 }
 
 private class PdfAdapter(
-    val onOpen: (String) -> Unit
+    val onOpen: (String) -> Unit,
+    val onDelete: (String) -> Unit
 ) : RecyclerView.Adapter<PdfVH>() {
     private val items = mutableListOf<PdfRepository.PdfItem>()
 
@@ -77,7 +90,7 @@ private class PdfAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PdfVH {
         val binding = ItemPdfBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PdfVH(binding, onOpen)
+        return PdfVH(binding, onOpen, onDelete)
     }
 
     override fun onBindViewHolder(holder: PdfVH, position: Int) {
@@ -89,10 +102,12 @@ private class PdfAdapter(
 
 private class PdfVH(
     private val binding: ItemPdfBinding,
-    private val onOpen: (String) -> Unit
+    private val onOpen: (String) -> Unit,
+    private val onDelete: (String) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(item: PdfRepository.PdfItem) {
         binding.tvName.text = item.name
         binding.btnOpen.setOnClickListener { onOpen(item.uri) }
+        binding.btnDelete.setOnClickListener { onDelete(item.uri) }
     }
 }

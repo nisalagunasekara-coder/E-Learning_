@@ -1,13 +1,12 @@
 package com.example.elearning.data
 
-import android.content.Context
 import android.net.Uri
 
 object VideoRepository {
     data class VideoItem(val uri: String, val name: String)
     private val items = mutableListOf<VideoItem>()
     fun list(): List<VideoItem> = items
-    fun add(context: Context, uri: Uri) {
+    fun add(uri: Uri) {
         val name = uri.lastPathSegment ?: "Video"
         items.add(0, VideoItem(uri.toString(), name))
         ActivityFeedRepository.add("Lecturer uploaded video: $name")

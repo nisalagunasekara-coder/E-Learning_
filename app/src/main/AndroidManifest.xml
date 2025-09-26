@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name=".ELearningApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_logo"
         android:label="@string/app_name"
@@ -18,7 +20,21 @@
         <activity android:name="com.example.elearning.ui.student.StudentDashboardActivity" android:exported="false"/>
         <activity android:name="com.example.elearning.ui.lecturer.LecturerDashboardActivity" android:exported="false"/>
         <activity android:name="com.example.elearning.ui.admin.AdminDashboardActivity" android:exported="false"/>
+        <activity android:name="com.example.elearning.ui.admin.UserManagementActivity" android:exported="false"/>
+        <activity android:name="com.example.elearning.ui.admin.ContentManagementActivity" android:exported="false"/>
+        <activity android:name="com.example.elearning.ui.admin.SystemSettingsActivity" android:exported="false"/>
         <activity android:name="com.example.elearning.ui.student.PdfMaterialsActivity" android:exported="false"/>
+        <activity android:name="com.example.elearning.ui.student.QuizHubActivity" android:exported="false"/>
+        <activity android:name="com.example.elearning.ui.student.QuizActivity" android:exported="false"/>
+        <activity android:name="com.example.elearning.ui.student.GamesHubActivity" android:exported="false"/>
+        <activity android:name="com.example.elearning.ui.student.GameMcqActivity" android:exported="false"/>
+        <activity android:name="com.example.elearning.ui.student.GameTrueFalseActivity" android:exported="false"/>
+        <activity android:name="com.example.elearning.ui.student.GameMemoryMatchActivity" android:exported="false"/>
+        <activity android:name="com.example.elearning.ui.settings.SettingsActivity" android:exported="false"/>
+        <!-- Lecturer feature screens -->
+        <activity android:name="com.example.elearning.ui.lecturer.VideoMaterialsActivity" android:exported="false"/>
+        <activity android:name="com.example.elearning.ui.lecturer.CreateQuizActivity" android:exported="false"/>
+        <activity android:name="com.example.elearning.ui.lecturer.StudentProgressActivity" android:exported="false"/>
     </application>
 
 </manifest>

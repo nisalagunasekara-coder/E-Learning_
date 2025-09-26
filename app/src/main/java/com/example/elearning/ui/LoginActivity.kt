@@ -33,16 +33,13 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.etPassword.text?.toString()?.trim().orEmpty()
 
             val user = AuthRepository.login(role, username, password)
-            if (user != null) {
-                when (user.role) {
-                    Role.ADMIN -> startActivity(Intent(this, AdminDashboardActivity::class.java))
-                    Role.LECTURER -> startActivity(Intent(this, LecturerDashboardActivity::class.java))
-                    Role.STUDENT -> startActivity(Intent(this, StudentDashboardActivity::class.java))
-                }
-                finish()
-            } else {
-                Toast.makeText(this, "Invalid credentials. Please try again.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Logged in as ${user!!.role} (${user.username})", Toast.LENGTH_SHORT).show()
+            when (user.role) {
+                Role.ADMIN -> startActivity(Intent(this, AdminDashboardActivity::class.java))
+                Role.LECTURER -> startActivity(Intent(this, LecturerDashboardActivity::class.java))
+                Role.STUDENT -> startActivity(Intent(this, StudentDashboardActivity::class.java))
             }
+            finish()
         }
     }
 }

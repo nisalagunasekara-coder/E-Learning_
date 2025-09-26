@@ -15,6 +15,11 @@ import com.example.elearning.databinding.ItemQuizBinding
 import com.example.elearning.ui.common.setupBackToolbar
 import com.example.elearning.ui.common.setupStudentBottomNav
 import com.example.elearning.R
+import com.example.elearning.data.db.DatabaseProvider
+import androidx.lifecycle.lifecycleScope
+import android.widget.Toast
+import kotlinx.coroutines.launch
+import android.util.Log
 
 class QuizHubActivity : AppCompatActivity() {
     private lateinit var binding: ActivityQuizHubBinding
@@ -28,8 +33,18 @@ class QuizHubActivity : AppCompatActivity() {
     private val pickPdf = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
         uri?.let {
             contentResolver.takePersistableUriPermission(it, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            QuizRepository.generateQuizFromPdf(it.toString(), title = "Quiz from PDF")
-            refresh()
+            // Call real API in background; fallback to local mock on failure
+            lifecycleScope.launch {
+                try {
+                    Toast.makeText(this@QuizHubActivity, "Generating quiz...", Toast.LENGTH_SHORT).show()
+                    QuizRepository.generateQuizFromPdfApi(this@QuizHubActivity, it, title = "Quiz from PDF")
+                } catch (e: Exception) {
+                    Toast.makeText(this@QuizHubActivity, "API failed, using local generator", Toast.LENGTH_LONG).show()
+                    QuizRepository.generateQuizFromPdf(it.toString(), title = "Quiz from PDF")
+                } finally {
+                    refresh()
+                }
+            }
         }
     }
 
@@ -38,11 +53,20 @@ class QuizHubActivity : AppCompatActivity() {
         binding = ActivityQuizHubBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Init database for repositories
+        DatabaseProvider.init(applicationContext)
+
         // Back button on toolbar
         setupBackToolbar(binding.toolbar, title = "Quizzes")
 
         // Bottom navigation
-        setupStudentBottomNav(binding.bottomNav.bottomNav, R.id.nav_quizzes)
+        try {
+            Toast.makeText(this, "Quiz Hub ready", Toast.LENGTH_SHORT).show()
+            setupStudentBottomNav(binding.bottomNav.bottomNav, R.id.nav_quizzes)
+        } catch (e: Exception) {
+            Log.e("QuizHub", "Bottom nav setup failed", e)
+            Toast.makeText(this, "Bottom nav error: ${e.message}", Toast.LENGTH_LONG).show()
+        }
 
         binding.recyclerQuizzes.layoutManager = LinearLayoutManager(this)
         binding.recyclerQuizzes.adapter = adapter
