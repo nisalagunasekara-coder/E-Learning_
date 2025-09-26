@@ -1,0 +1,5 @@
+// Root build file intentionally minimal. Repositories are managed in settings.gradle via dependencyResolutionManagement.
+
+tasks.register('clean', Delete) {
+    delete rootProject.buildDir
+}
